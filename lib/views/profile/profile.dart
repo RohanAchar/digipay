@@ -50,9 +50,9 @@ class ProfileFormState extends State<ProfileForm> {
   String _emailid;
   String _aadharno;
 
-  bool validate() {
+   bool validate() {
     final form = formKey.currentState; //all the text fields will be set to values
-    form.save();
+    form.save(); // to save the form
     if (form.validate()) {
       form.save();
       return true;
