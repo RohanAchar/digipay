@@ -78,7 +78,7 @@ class ProfileFormState extends State<ProfileForm> {
 
     }
 
-      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Processing Data')));
+  
 
   }
 
