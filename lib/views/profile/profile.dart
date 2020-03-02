@@ -50,9 +50,9 @@ class ProfileFormState extends State<ProfileForm> {
   String _emailid;
   String _aadharno;
 
-   bool validate() {
+  bool validate() {
     final form = formKey.currentState; //all the text fields will be set to values
-    form.save(); // to save the form
+    form.save();
     if (form.validate()) {
       form.save();
       return true;
@@ -78,7 +78,7 @@ class ProfileFormState extends State<ProfileForm> {
 
     }
 
-  
+      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Processing Data')));
 
   }
 
