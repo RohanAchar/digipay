@@ -26,7 +26,7 @@ Stream<UserData> get userData{
     return profileCollection.document(uid).snapshots().map(_userDataFromSnapshot);
 }
 
-
+// get the user data
 UserData _userDataFromSnapshot(DocumentSnapshot snapshot){
     return UserData(
         uid:uid,
