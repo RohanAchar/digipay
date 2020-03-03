@@ -22,6 +22,13 @@ class DatabaseService {
     });
   }
 
+  Future updateWalletData(String wallet) async {
+    return await profileCollection.document(uid).setData({
+      'user_wallet': wallet,
+    });
+  }
+
+
 
 
 
@@ -42,6 +49,7 @@ UserData _userDataFromSnapshot(DocumentSnapshot snapshot){
 
     );
 }
+
 
 
 Stream<DocumentSnapshot> getProfileData(String uid){
