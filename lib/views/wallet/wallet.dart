@@ -1,4 +1,5 @@
 import 'package:digipay_master1/views/wallet/account/addaccounts/addaccount.dart';
+import 'package:digipay_master1/views/wallet/account/manageaccounts/manage_account.dart';
 import 'package:digipay_master1/views/wallet/cards/addcards/cards.dart';
 import 'package:digipay_master1/views/wallet/cards/manage_cards.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class _DashboardState extends State<Dashboard1> {
   final _formKey = GlobalKey<FormState>();
     int balance=0;
     String h;
-    int fb=global.wallet;
+    int fb1=global.wallet;
     final myController = TextEditingController();
     void dispose() {
     // Clean up the controller when the widget is disposed.
@@ -35,7 +36,7 @@ class _DashboardState extends State<Dashboard1> {
   void _addBalance(){
     if(validate()){
       global.wallet=global.wallet+balance;
-      fb=global.wallet;
+      fb1=global.wallet;
       Navigator.push(context, MaterialPageRoute(builder: (context)=> Dashboard1()));
       
     }
@@ -87,7 +88,7 @@ class _DashboardState extends State<Dashboard1> {
           child:Align(
                           alignment: Alignment.center,
                           child: Text(
-                            'YOUR WALLET BALANCE IS $fb',
+                            'YOUR WALLET BALANCE IS $fb1',
                             style:TextStyle(
                                 color: Colors.black,
                                 fontSize: 25,
@@ -150,11 +151,11 @@ class _DashboardState extends State<Dashboard1> {
                                 fontSize: 25,
                               ),),
                               onPressed:(){
-                                
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => ManageAccounts()));
                                 //Navigator.of(context).pushNamed("HomePage");
                               },),
         ),
-        Container(
+        /*Container(
         child: RaisedButton(
           onPressed: () {
             showDialog(
@@ -196,7 +197,7 @@ class _DashboardState extends State<Dashboard1> {
                               
                               
                               ),
-        )
+        )*/
 
         
         
