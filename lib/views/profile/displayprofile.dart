@@ -16,10 +16,8 @@ class ProfileView extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
 
-
   @override
-  Widget build(BuildContext context)  {
-
+  Widget build(BuildContext context) {
     Firestore _firestore = Firestore.instance;
 
     //final user =Provider.of(context).auth.getCurrentUser();
@@ -33,11 +31,10 @@ class ProfileView extends StatelessWidget {
           if (!snapshot.hasData) {
             print("No data found");
             return CircularProgressIndicator();
-
           } else {
             return displayUserInformation(context, snapshot);
 
-           /* final listElements = snapshot.data.documents;
+            /* final listElements = snapshot.data.documents;
             List<UserDeets> conversationList = [];
             for (var user in listElements) {
               final String uid = user.data['user_id'];
@@ -57,7 +54,7 @@ class ProfileView extends StatelessWidget {
   }
 
 
-    /*return SingleChildScrollView(
+  /*return SingleChildScrollView(
       child: Container(
         width: MediaQuery
             .of(context)
@@ -95,22 +92,26 @@ class ProfileView extends StatelessWidget {
 
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text("Email : ${user['user_email']}", style: TextStyle(fontSize: 20),),
+          child: Text(
+            "Email : ${user['user_email']}", style: TextStyle(fontSize: 20),),
         ),
 
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text("Phone No. : ${user['user_phone']}", style: TextStyle(fontSize: 20),),
+          child: Text("Phone No. : ${user['user_phone']}",
+            style: TextStyle(fontSize: 20),),
         ),
 
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text("Aadhar No : ${user['user_aadhar']}", style: TextStyle(fontSize: 20),),
+          child: Text("Aadhar No : ${user['user_aadhar']}",
+            style: TextStyle(fontSize: 20),),
         ),
 
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text("Address : ${user['user_address']}", style: TextStyle(fontSize: 20),),
+          child: Text("Address : ${user['user_address']}",
+            style: TextStyle(fontSize: 20),),
         ),
 
 
@@ -120,21 +121,20 @@ class ProfileView extends StatelessWidget {
   }
 
   Widget showEditbtn(context, snapshot) {
-
     final user = snapshot.data;
-      return RaisedButton(
-        child: Text("Edit"),
-        onPressed: () {
-          scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Editing Data')));
-   // _showEditProfile(user.name, user.phone, user.email, user.aadhar, user.address);
-
-
-        },
-      );
-    }
+    return RaisedButton(
+      child: Text("Edit"),
+      onPressed: () {
+        _showEditProfile(
+            user['user_name'], user['user_phone'], user['user_email'],
+            user['user_aadhar'], user['user_address'], context);
+      },
+    );
+  }
 
   bool validate() {
-    final form = formKey.currentState; //all the text fields will be set to values
+    final form = formKey
+        .currentState; //all the text fields will be set to values
     form.save();
     if (form.validate()) {
       form.save();
@@ -144,8 +144,7 @@ class ProfileView extends StatelessWidget {
     }
   }
 
- /*void _showEditProfile(String n, String p,String e, String aadhar, String add) {
-
+  void _showEditProfile(String n, String p, String e, String aadhar, String add, context) {
     showModalBottomSheet(
 
         context: context,
@@ -185,8 +184,7 @@ class ProfileView extends StatelessWidget {
                         hintStyle: TextStyle(color: Colors.grey[400])),
 
                     onChanged: (val) {
-                        n = val;
-
+                      n = val;
                     },
                   ),
                 ),
@@ -252,7 +250,7 @@ class ProfileView extends StatelessWidget {
                         hintStyle: TextStyle(color: Colors.grey[400])),
 
                     onChanged: (val) {
-                     p = val;
+                      p = val;
                     },
                   ),
                 ),
@@ -275,7 +273,7 @@ class ProfileView extends StatelessWidget {
                       fontWeight: FontWeight.bold,),
                   ),
                   onPressed: () async {
-                    if(validate()) {
+                    if (validate()) {
                       try {
                         final uid = await Provider
                             .of(context)
@@ -285,18 +283,18 @@ class ProfileView extends StatelessWidget {
                             n, e, p, aadhar, add);
                         Navigator.pop(context);
                       }
-                      catch(e)
-                    {
-                      print(e);
-                      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Error Updating data')));
-                    }
+                      catch (e) {
+                        print(e);
+                        scaffoldKey.currentState.showSnackBar(
+                            SnackBar(content: Text('Error Updating data')));
+                      }
                     }
                   },
                 ),
               ],
             ),
           );
-        }); */
+        });
   }
 
-
+}

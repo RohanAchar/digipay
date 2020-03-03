@@ -60,6 +60,7 @@ class _SignUpViewState extends State<SignUpView> {
         if (authFormType == AuthFormType.signIn) {
           String uid = await auth.signInWithEmailAndPassword(_email, _password);
           print("Signed In with ID $uid");
+          current_user_uid = uid;
           Navigator.of(context).pushReplacementNamed('/home');
         } else if (authFormType == AuthFormType.reset) {
           await auth.sendPasswordResetEmail(_email);
@@ -72,6 +73,7 @@ class _SignUpViewState extends State<SignUpView> {
           String uid = await auth.createUserWithEmailAndPassword(
               _email, _password, _name);
           print("Signed up with New ID $uid");
+
           Navigator.of(context).pushReplacementNamed('/home'); //home contains homecontroller
         }
       } catch (e) {
