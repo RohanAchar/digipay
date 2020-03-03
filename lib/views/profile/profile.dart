@@ -69,6 +69,7 @@ class ProfileFormState extends State<ProfileForm> {
       try{
         final uid = await Provider.of(context).auth.getCurrentUID();
         await DatabaseService(uid: uid).updateUserData(_name, _phno, _emailid, _aadharno, _address);
+        await DatabaseService(uid: uid).updateWalletData('0');
         current_user_uid=uid;
 
       }
