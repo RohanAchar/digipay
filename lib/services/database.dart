@@ -12,13 +12,14 @@ class DatabaseService {
       Firestore.instance.collection('users');
 
   Future updateUserData(
-      String name, String phone, String email, String aadhar, String address) async {
+      String name, String phone, String email, String aadhar, String address,String wallet) async {
     return await profileCollection.document(uid).setData({
       'user_name': name,
       'user_email': email,
       'user_phone': phone,
       'user_aadhar': aadhar,
       'user_address': address,
+      'user_wallet': wallet,
     });
   }
 
