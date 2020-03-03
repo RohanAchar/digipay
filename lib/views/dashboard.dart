@@ -9,6 +9,7 @@ import 'shop.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:digipay_master1/views/profile/displayprofile.dart';
 
+
 class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
@@ -170,7 +171,7 @@ class _DashboardState extends State<Dashboard> {
   }
   
 
-  Card makeDashboardItem1(String title, IconData icon) {
+  Card makeDashboardItem1(String title, IconData icon)  {
     return Card(
       color:Colors.white,
         elevation: 0.01,
@@ -221,7 +222,7 @@ class _DashboardState extends State<Dashboard> {
           ),
         ));
   }
-  Card makeDashboardItem(String title, IconData icon) {
+  Card makeDashboardItem(String title, IconData icon)  {
     return Card(
       color:Colors.blue[800],
         elevation: 0.01,

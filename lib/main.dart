@@ -7,6 +7,7 @@ import 'package:digipay_master1/views/sign_up_view.dart';
 import 'package:digipay_master1/widgets/provider_widget.dart';
 import 'package:digipay_master1/services/auth_service.dart';
 import 'package:digipay_master1/views/profile/profile.dart';
+import 'package:digipay_master1/models/uid.dart';
 
 void main() => runApp(MyApp());
 
@@ -36,12 +37,13 @@ class HomeController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthService auth = Provider.of(context).auth;
+
     return StreamBuilder<String>(
       stream: auth.onAuthStateChanged,
       builder: (context, AsyncSnapshot<String> snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           final bool signedIn = snapshot.hasData;
-          return signedIn ? Dashboard(): FirstView();
+          return signedIn ? Profile(): FirstView();
         }
         return CircularProgressIndicator();
       },

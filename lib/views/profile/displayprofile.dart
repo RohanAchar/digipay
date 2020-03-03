@@ -10,7 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 final scaffoldKey = new GlobalKey<ScaffoldState>();
 final formKey = new GlobalKey<FormState>();
-
+/*
 class ProfileView extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
@@ -34,49 +34,12 @@ class ProfileView extends StatelessWidget {
           } else {
             return displayUserInformation(context, snapshot);
 
-            /* final listElements = snapshot.data.documents;
-            List<UserDeets> conversationList = [];
-            for (var user in listElements) {
-              final String uid = user.data['user_id'];
-              print('$uid');
 
-              final z = UserDeets(
-                friendUID: uid,
-              );
-              conversationList.add(z);
-            }
-            loading = false;
-            return ListView(
-              children: conversationList,
-            );*/
           }
         });
   }
 
 
-  /*return SingleChildScrollView(
-      child: Container(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
-        key: _formKey,
-        child: Column(
-          children: <Widget>[
-            FutureBuilder(
-              future: Provider.of(context).auth.getCurrentUser(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return displayUserInformation(context, snapshot);
-                } else {
-                  return CircularProgressIndicator();
-                }
-              },
-            )
-          ],
-        ),
-      ),
-    ); */
 
 
   Widget displayUserInformation(context, snapshot) {
@@ -264,11 +227,11 @@ class ProfileView extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                       vertical: 12, horizontal: 40),
 
-                  color: Colors.lightGreen,
+                  color: Colors.blue,
                   child: Text(
                     "Update",
                     style: TextStyle(
-                      color: Colors.black54,
+                      color: Colors.white,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,),
                   ),
@@ -295,6 +258,223 @@ class ProfileView extends StatelessWidget {
             ),
           );
         });
+  }
+
+} */
+
+
+
+
+
+
+
+class ProfileView extends StatelessWidget {
+
+  final _formKey = GlobalKey<FormState>();
+
+
+
+  @override
+  Widget build(BuildContext context)  {
+
+    Firestore _firestore = Firestore.instance;
+
+    //final user =Provider.of(context).auth.getCurrentUser();
+
+    return StreamBuilder<DocumentSnapshot>(
+        stream: _firestore
+            .collection('users')
+            .document('$current_user_uid')
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            print("No data found");
+            return CircularProgressIndicator();
+
+          } else {
+            return displayUserInformation(context, snapshot);
+
+
+          }
+        });
+  }
+
+
+
+
+  Widget displayUserInformation(context, snapshot) {
+    final user = snapshot.data;
+
+    return Scaffold(
+      appBar: AppBar(
+
+        leading: FlatButton(
+          onPressed: (){
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        ),
+        title: Text("Profile Page"),
+      ),
+      backgroundColor: Color.fromRGBO(255,255,255, 1.0),
+      body:Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        verticalDirection: VerticalDirection.down,
+        children: <Widget>[
+          Container(
+            height:40,
+            width:double.maxFinite,
+            margin:EdgeInsets.only(left:1.0,right:1.0),
+            child:Card(
+              elevation:0.01,
+              color:Colors.white,
+
+
+            ),
+          ),
+
+
+
+          Text(""),
+          Container(
+            child: Column(
+       
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'NAME : ${user['user_name']}',
+                  style:  TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                ),
+
+              ],
+            ),
+          ),
+
+          Text(""),
+          Text(""),
+
+
+          Container(
+            child: Column(
+
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'EMAIL : ${user['user_email']}',
+                  style:  TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                ),
+
+              ],
+            ),
+          ),
+          Text(""),
+          Text(""),
+          Container(
+            child: Column(
+
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+
+                Text(
+                    'PHONE No. : ${user['user_phone']}',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+
+                    )
+                ),
+
+              ],
+            ),
+          ),
+          Text(""),
+          Text(""),
+
+          Container(
+            child: Column(
+
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                    'AADHAR No. : ${user['user_aadhar']}',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+
+                    )
+                ),
+
+              ],
+            ),
+
+          ),
+          Text("   "),
+          Text("  "),
+          Container(
+            child: Column(
+
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                    'ADDRESS : ${user['user_address']}',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+
+                    )
+                ),
+
+              ],
+            ),
+          ),
+          Text(" "),
+          Text(" "),
+          Text(" "),
+          Text(" "),
+          Text(" "),
+
+
+          showEditbtn(context, snapshot),
+
+
+        ],
+      ),
+    );
+  }
+  Widget showEditbtn(context, snapshot) {
+
+    final user = snapshot.data;
+    return RaisedButton(
+      child: Text("Edit"),
+      onPressed: () {
+        scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Editing Data')));
+        // _showEditProfile(user.name, user.phone, user.email, user.aadhar, user.address);
+
+
+      },
+    );
+  }
+
+  bool validate() {
+    final form = formKey.currentState; //all the text fields will be set to values
+    form.save();
+    if (form.validate()) {
+      form.save();
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }
