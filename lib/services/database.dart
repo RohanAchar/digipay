@@ -1,11 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digipay_master1/models/user.dart';
+import 'package:digipay_master1/widgets/provider_widget.dart';
+import 'package:digipay_master1/services/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/widgets.dart';
+import 'package:digipay_master1/models/uid.dart';
 
 
 class DatabaseService {
   final String uid;
 
   DatabaseService({this.uid});
+
 
   final CollectionReference profileCollection =
       Firestore.instance.collection('users');
@@ -19,49 +25,21 @@ class DatabaseService {
       'user_aadhar': aadhar,
       'user_address': address,
     });
+
+
   }
 
-//  Stream<DocumentSnapshot> get profile {
-//
-////    print("database class :$uid");
-////    DocumentReference docRef = await
-////         Firestore.instance.collection('user_profiles').document(uid);
-////    await docRef.get().then((DocumentSnapshot datasnapshot) {
-////      if (datasnapshot.exists) {
-////
-////       String u;
-////       String s;
-////       String e;
-////       String p;
-////        u=datasnapshot.data['user_name'];
-////        s=datasnapshot.data['user_status'];
-////        p=datasnapshot.data['user_phone'];
-////        e=datasnapshot.data['user_email'];
-////
-////        User_Profile up=new User_Profile(u,s,p,e);
-////        print(datasnapshot.data);
-////
-////        return profileCollection.document((uid));
-////
-////      }
-////      else{
-////        print("document not found");
-////        return null;
-////      }
-//
-//
-////
-//  return profileCollection.document()
-//
-//  }
-
-  //hallo Stream
 
 
 
 Stream<UserData> get userData{
     return profileCollection.document(uid).snapshots().map(_userDataFromSnapshot);
 }
+
+  Stream<DocumentSnapshot> getUsersprofileSnapshot(BuildContext context) async* {
+    final uid = await Provider.of(context).auth.getCurrentUID();
+    yield* Firestore.instance.collection('users').document(uid).snapshots();
+  }
 
 
 UserData _userDataFromSnapshot(DocumentSnapshot snapshot){
@@ -71,7 +49,8 @@ UserData _userDataFromSnapshot(DocumentSnapshot snapshot){
         phone: snapshot.data['user_phone'],
         email: snapshot.data['user_email'],
         aadhar: snapshot.data['user_aadhar'],
-        address: snapshot.data['user_address']
+        address: snapshot.data['user_address'],
+        wallet: snapshot.data['user_wallet']
 
 
     );

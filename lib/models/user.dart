@@ -14,7 +14,7 @@ class UserData{
   String address;
 
 
-  UserData({this.uid,this.name,this.email,this.phone,this.aadhar,this.address});
+  UserData({this.uid,this.name,this.email,this.phone,this.aadhar,this.address, wallet});
 
 }
 

@@ -4,6 +4,8 @@ import 'package:string_validator/string_validator.dart' as v;
 import 'package:digipay_master1/views/profile/datetimepick.dart';
 import 'package:digipay_master1/services/database.dart';
 import 'package:digipay_master1/widgets/provider_widget.dart';
+import 'package:digipay_master1/views/dashboard.dart';
+import 'package:digipay_master1/models/uid.dart';
 
 final scaffoldKey = new GlobalKey<ScaffoldState>();
 final formKey = new GlobalKey<FormState>();
@@ -68,6 +70,8 @@ class ProfileFormState extends State<ProfileForm> {
       try{
         final uid = await Provider.of(context).auth.getCurrentUID();
         await DatabaseService(uid: uid).updateUserData(_name, _phno, _emailid, _aadharno, _address);
+        current_user_uid = uid;
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Dashboard()));
 
       }
       catch(e)
@@ -77,8 +81,6 @@ class ProfileFormState extends State<ProfileForm> {
     }
 
     }
-
-      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Processing Data')));
 
   }
 

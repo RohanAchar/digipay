@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:digipay_master1/services/auth_service.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:digipay_master1/widgets/provider_widget.dart';
+import 'package:digipay_master1/views/profile/profile.dart';
+import 'package:digipay_master1/models/uid.dart';
 
 // TODO move this to tone location
 final primaryColor = const Color(0xFF75A2EA);

@@ -6,6 +6,7 @@ import 'package:digipay_master1/views/first_view.dart';
 import 'package:digipay_master1/views/sign_up_view.dart';
 import 'package:digipay_master1/widgets/provider_widget.dart';
 import 'package:digipay_master1/services/auth_service.dart';
+import 'package:digipay_master1/views/profile/profile.dart';
 
 void main() => runApp(MyApp());
 
@@ -40,7 +41,7 @@ class HomeController extends StatelessWidget {
       builder: (context, AsyncSnapshot<String> snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           final bool signedIn = snapshot.hasData;
-          return signedIn ? Dashboard(): FirstView();
+          return signedIn ? ProfileForm(): FirstView();
         }
         return CircularProgressIndicator();
       },
@@ -48,4 +49,3 @@ class HomeController extends StatelessWidget {
   }
 }
 
-//helloo this is rohan !!
