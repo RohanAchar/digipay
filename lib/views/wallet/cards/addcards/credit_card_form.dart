@@ -254,7 +254,7 @@ bool validate() {
 class CardnoValidator {
   static String validate(String value) {
     if (value.isEmpty) {
-      return "Email can't be empty";
+      return "Card number can't be empty";
     }
     if (value.length < 19) {
       return "Enter a 16 digit card number";
