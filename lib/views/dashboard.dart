@@ -7,6 +7,8 @@ import 'package:digipay_master1/widgets/provider_widget.dart';
 import 'package:digipay_master1/services/auth_service.dart';
 import 'shop.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:digipay_master1/views/wallet/wallet.dart';
+
 
 class Dashboard extends StatefulWidget {
   @override
@@ -178,7 +180,7 @@ class _DashboardState extends State<Dashboard> {
           child: new InkWell(
             onTap: () {
               if(title=='Shopping')
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Shop(model: null)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Shop(model:CartModel())));
 
               //else if(title=='Bus')
               //Navigator.push(context, MaterialPageRoute(builder: (context) => Shop(model: null)));
@@ -231,8 +233,8 @@ class _DashboardState extends State<Dashboard> {
               if(title=='Profile')
               Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
 
-              //else if(title=='Wallet')
-              //Navigator.push(context, MaterialPageRoute(builder: (context) => Shop(model: null)));
+              else if(title=='Wallet')
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Dashboard1()));
 
               //else 
               //Navigator.push(context, MaterialPageRoute(builder: (context) => Shop(model: null)));

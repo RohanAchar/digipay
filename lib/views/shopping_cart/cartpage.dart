@@ -82,7 +82,7 @@ class _CartPageState extends State<CartPage> {
                   Container(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        "Total: \$ " +
+                        "Total: \₹ " +
                             ScopedModel.of<CartModel>(context,
                                     rebuildOnChange: true)
                                 .totalCartValue

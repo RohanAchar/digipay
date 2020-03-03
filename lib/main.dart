@@ -1,3 +1,4 @@
+import 'package:digipay_master1/models/uid.dart';
 import 'package:digipay_master1/views/shopping_cart/cartpage.dart';
 import 'package:flutter/material.dart';
 import 'home_widget.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
           '/signUp': (BuildContext context) => SignUpView(authFormType: AuthFormType.signUp),
           '/signIn': (BuildContext context) => SignUpView(authFormType: AuthFormType.signIn),
           '/home': (BuildContext context) => HomeController(),
-          '/cart': (context) => CartPage()
+          '/cart': (BuildContext context) => CartPage()
         },
       ),
     );
@@ -41,6 +42,7 @@ class HomeController extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.active) {
           final bool signedIn = snapshot.hasData;
           return signedIn ? Dashboard(): FirstView();
+
         }
         return CircularProgressIndicator();
       },

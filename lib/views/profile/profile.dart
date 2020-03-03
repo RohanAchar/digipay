@@ -1,7 +1,10 @@
+import 'package:digipay_master1/models/uid.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:string_validator/string_validator.dart' as v;
 import 'package:digipay_master1/views/profile/datetimepick.dart';
+import 'package:digipay_master1/services/database.dart';
+import 'package:digipay_master1/widgets/provider_widget.dart';
 
 final scaffoldKey = new GlobalKey<ScaffoldState>();
 final formKey = new GlobalKey<FormState>();
@@ -42,19 +45,43 @@ class ProfileFormState extends State<ProfileForm> {
 
   String _phno;
   String _name;
-  String _password;
-  String _conpassword;
+  //String _password;
+  //String _conpassword;
   String _address;
   String _emailid;
   String _aadharno;
 
-  void performSubmit() {
+   bool validate() {
+    final form = formKey.currentState; //all the text fields will be set to values
+    form.save(); // to save the form
+    if (form.validate()) {
+      form.save();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void performSubmit() async {
     //getData();
 
-    if (formKey.currentState.validate()) {
-      // If the form is valid, display a Snackbar.
+    if (validate()) {
+      try{
+        final uid = await Provider.of(context).auth.getCurrentUID();
+        await DatabaseService(uid: uid).updateUserData(_name, _phno, _emailid, _aadharno, _address);
+        current_user_uid=uid;
+
+      }
+      catch(e)
+    {
+      print(e);
       scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Processing Data')));
     }
+
+    }
+
+  
+
   }
 
   @override
@@ -149,7 +176,7 @@ class ProfileFormState extends State<ProfileForm> {
                                       labelText: "Enter address"),
                                   onSaved: (val) => _address = val,
                                 ),
-                                new TextFormField(
+                                /*new TextFormField(
                                     controller: _pass,
                                     decoration: new InputDecoration(
                                         labelText: "Enter password"),
@@ -170,7 +197,7 @@ class ProfileFormState extends State<ProfileForm> {
                                   },
                                   onSaved: (val) => _conpassword = val,
                                   obscureText: true,
-                                ),
+                                ),*/
                                 new Padding(
                                   padding: const EdgeInsets.only(top: 20.0),
                                 ),

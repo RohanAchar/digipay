@@ -70,7 +70,7 @@ class _SignUpViewState extends State<SignUpView> {
           String uid = await auth.createUserWithEmailAndPassword(
               _email, _password, _name);
           print("Signed up with New ID $uid");
-          Navigator.of(context).pushReplacementNamed('/home'); //home contains homecontroller
+          Navigator.of(context).pushReplacementNamed('/signIn'); //home contains homecontroller
         }
       } catch (e) {
         print(e);
