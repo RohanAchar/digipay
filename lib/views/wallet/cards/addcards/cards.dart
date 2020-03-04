@@ -101,8 +101,8 @@ import 'package:digipay_master1/views/wallet/cards/addcards/credit_card_model.da
 import 'package:flutter_credit_card/credit_card_widget.dart';
 import 'package:string_validator/string_validator.dart' as v;
 
-final scaffoldKey = new GlobalKey<ScaffoldState>();
-final formKey = new GlobalKey<FormState>();
+final scaffoldKey5 = new GlobalKey<ScaffoldState>();
+final formKey5 = new GlobalKey<FormState>();
 
 /*void main() => runApp(MySample());
 
@@ -155,9 +155,9 @@ class _CreditCardState extends State<CreditCard> {
       catch(e)
     {
       print(e);
-      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Processing Data')));
+      scaffoldKey5.currentState.showSnackBar(SnackBar(content: Text('Processing Data')));
     }
-    Navigator.push(
+    Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => Dashboard1()));
 
     }

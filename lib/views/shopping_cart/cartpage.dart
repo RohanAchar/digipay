@@ -1,6 +1,11 @@
+import 'package:digipay_master1/services/database.dart';
+import 'package:digipay_master1/views/dashboard.dart';
+import 'package:digipay_master1/views/wallet/cards/manage_cards.dart';
+import 'package:digipay_master1/widgets/provider_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'cartmodel.dart';
+import 'package:digipay_master1/views/wallet/account/addaccounts/globals.dart' as global;
 
 class CartPage extends StatefulWidget {
   @override
@@ -10,6 +15,26 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+   
+   /*void performSave(String money) async {
+    //getData();
+    //if (validate()) {
+      try{
+        final uid = await Provider.of(context).auth.getCurrentUID();
+        await DatabaseService(uid: uid).getProfileData(uid);
+
+
+      }
+      catch(e)
+    {
+      print(e);
+      scaffoldKey5.currentState.showSnackBar(SnackBar(content: Text('Processing Data')));
+    }
+    Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Dashboard1()));
+
+    }
+  }*/
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -98,7 +123,25 @@ class _CartPageState extends State<CartPage> {
                         textColor: Colors.white,
                         elevation: 0,
                         child: Text("BUY NOW"),
-                        onPressed: () {},
+                        onPressed: () {
+                          if(global.wallet< ScopedModel.of<CartModel>(context,
+                                    rebuildOnChange: true)
+                                .totalCartValue){
+                                  //global.wallet=0;
+                                  global.rem= ScopedModel.of<CartModel>(context,
+                                    rebuildOnChange: true).totalCartValue - global.wallet;
+                                  global.wallet=0;
+                                      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => ManageCards()));
+                                }
+                          else{
+                            //(val)=>bal=int.parse(val),
+                            global.wallet= global.wallet - ScopedModel.of<CartModel>(context,
+                                    rebuildOnChange: true).totalCartValue;
+                                    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => Dashboard()));
+                          }
+
+                          
+                        },
                       ))
                 ])));
   }

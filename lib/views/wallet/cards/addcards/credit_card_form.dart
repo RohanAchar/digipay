@@ -7,8 +7,8 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'credit_card_model.dart';
 import 'package:string_validator/string_validator.dart' as v;
 
-final scaffoldKey = new GlobalKey<ScaffoldState>();
-final formKey = new GlobalKey<FormState>();
+final scaffoldKey2 = new GlobalKey<ScaffoldState>();
+final formKey2 = new GlobalKey<FormState>();
 
 class CreditCardForm extends StatefulWidget {
   const CreditCardForm({
@@ -149,7 +149,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
         primaryColorDark: themeColor,
       ),
       child: Form(
-        key: formKey,
+        key: formKey2,
         child: Column(
           children: <Widget>[
             Container(
@@ -241,7 +241,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
 }
 
 bool validate() {
-  final form = formKey.currentState; //all the text fields will be set to values
+  final form = formKey2.currentState; //all the text fields will be set to values
   form.save();
   if (form.validate()) {
     form.save();

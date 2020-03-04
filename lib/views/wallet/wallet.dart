@@ -11,7 +11,7 @@ class Dashboard1 extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard1> {
 
-  final _formKey = GlobalKey<FormState>();
+  final _formKey3 = GlobalKey<FormState>();
     int balance=0;
     String h;
     int fb1=global.wallet;
@@ -23,7 +23,7 @@ class _DashboardState extends State<Dashboard1> {
   }
 
  bool validate() {
-    final form = _formKey.currentState; //all the text fields will be set to values
+    final form = _formKey3.currentState; //all the text fields will be set to values
     form.save(); // to save the form
     if (form.validate()) {
       form.save();

@@ -7,31 +7,31 @@ class HomePage extends StatelessWidget {
     Product(
         id: 1,
         title: "Laptop",
-        price: 30000.0,
+        price: 30000,
         imgUrl: "https://img.icons8.com/dusk/64/000000/laptop.png",
         qty: 1),
     Product(
         id: 2,
         title: "Pendrive",
-        price: 400.0,
+        price: 400,
         imgUrl: "https://img.icons8.com/doodle/96/000000/usb-memory-stick--v1.png",
         qty: 1),
     Product(
         id: 3,
         title: "Orange",
-        price: 20.0,
+        price: 20,
         imgUrl: "https://img.icons8.com/cotton/2x/orange.png",
         qty: 1),
     Product(
         id: 4,
         title: "Melon",
-        price: 40.0,
+        price: 40,
         imgUrl: "https://img.icons8.com/cotton/2x/watermelon.png",
         qty: 1),
     Product(
         id: 5,
         title: "Earphones",
-        price: 1000.0,
+        price: 1000,
         imgUrl: "https://img.icons8.com/nolan/96/earbud-headphones.png",
         qty: 1),
   ];

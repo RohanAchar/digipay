@@ -2,7 +2,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 class CartModel extends Model {
   List<Product> cart = [];
-  double totalCartValue = 0;
+  int totalCartValue = 0;
 
   int get total => cart.length;
 
@@ -54,7 +54,7 @@ class Product {
   int id;
   String title;
   String imgUrl;
-  double price;
+  int price;
   int qty;
 
   Product({this.id, this.title, this.price, this.qty, this.imgUrl});

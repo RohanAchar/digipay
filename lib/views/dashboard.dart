@@ -265,6 +265,7 @@ class _DashboardState extends State<Dashboard> {
   } 
 }
 */
+import 'package:digipay_master1/views/profile/displayprofile.dart';
 import 'package:digipay_master1/views/profile/profile.dart';
 import 'package:digipay_master1/views/shopping_cart/cartmodel.dart';
 import 'package:digipay_master1/views/shopping_cart/cartpage.dart';
@@ -284,7 +285,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
 
-  final _formKey = GlobalKey<FormState>();
+  final _formKey4 = GlobalKey<FormState>();
     
     int bal=0;
     String send;
@@ -297,7 +298,7 @@ class _DashboardState extends State<Dashboard> {
   }
 
  bool validate() {
-    final form = _formKey.currentState; //all the text fields will be set to values
+    final form = _formKey4.currentState; //all the text fields will be set to values
     form.save(); // to save the form
     if (form.validate()) {
       form.save();
@@ -488,7 +489,7 @@ class _DashboardState extends State<Dashboard> {
                 builder: (BuildContext context) {
                   return AlertDialog(
                     content: Form(
-                      key: _formKey,
+                      key: _formKey4,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
@@ -571,7 +572,7 @@ class _DashboardState extends State<Dashboard> {
           child: new InkWell(
             onTap: () {
               if(title=='Profile')
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileView()));
 
               else if(title=='Wallet')
               Navigator.push(context, MaterialPageRoute(builder: (context) => Dashboard1()));

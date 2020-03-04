@@ -108,6 +108,8 @@ final _formKey = GlobalKey<FormState>();
                             padding: EdgeInsets.all(8.0),
                             child: TextFormField(
                               decoration: new InputDecoration(labelText: "Money to add in the wallet"),
+                              keyboardType: TextInputType.number,
+                              textInputAction: TextInputAction.done,
                               onSaved: (val)=>balance=int.parse(val),
                             ),
                           ),
@@ -118,7 +120,8 @@ final _formKey = GlobalKey<FormState>();
                               child: Text("ADD CASH"),
                               onPressed:(
                                 
-                                 _addBalance),
+                                 _addBalance
+                                 ),
                             ),
                           )
                         ],

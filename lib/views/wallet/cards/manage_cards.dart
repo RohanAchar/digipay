@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digipay_master1/services/database.dart';
+import 'package:digipay_master1/views/dashboard.dart';
+import 'package:digipay_master1/views/wallet/wallet.dart';
 import 'package:digipay_master1/widgets/provider_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -121,7 +123,7 @@ class ManageCards extends StatelessWidget {
       global.wallet=global.wallet+balance;
       fb=global.wallet;
       print(global.wallet);
-      
+      //Navigator.pushReplacement(context, newRoute)
       
     }
 
@@ -200,6 +202,8 @@ class ManageCards extends StatelessWidget {
                             padding: EdgeInsets.all(8.0),
                             child: TextFormField(
                               decoration: new InputDecoration(labelText: "Money to add in the wallet"),
+                              keyboardType: TextInputType.number,
+                              textInputAction: TextInputAction.done,
                               onSaved: (val)=>balance=int.parse(val),
                             ),
                           ),
@@ -210,17 +214,76 @@ class ManageCards extends StatelessWidget {
                               child: Text("ADD CASH"),
                               onPressed:(
                                 
-                                 _addBalance),
+                                 _addBalance
+                                 
+                                 ),
                             ),
                           )
                         ],
                       ),
                     ),
                   );
-                });
-
+                }
+                
+                );
+                  //Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => ManageCards()));
                                   }//performSubmit,
                   ),
+                  Spacer(),
+                ]),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
+                child: Row(children: <Widget>[
+                  new RaisedButton(
+                                  child: new Text("PAY ${global.rem}",
+                                  style:TextStyle(
+                                    fontSize:18,
+                                    color:Colors.black54,
+                                  )),
+                                  onPressed: (){
+                                    global.rem=0;
+                                    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => Dashboard()));
+                                    //showDialog(
+                                      //context: context,
+                //builder: (BuildContext context) {
+                  //return AlertDialog(
+                    //content: Form(
+                      ///key: _formKey,
+                      //child: Column(
+                        //mainAxisSize: MainAxisSize.min,
+                        //children: <Widget>[
+                          //Padding(
+                            ///padding: EdgeInsets.all(8.0),
+                            //child: TextFormField(
+                              //decoration: new InputDecoration(labelText: "Money to add in the wallet"),
+                              //keyboardType: TextInputType.number,
+                              //textInputAction: TextInputAction.done,
+                              //onSaved: (val)=>balance=int.parse(val),
+                            //),
+                          //),
+                          
+                         // Padding(
+                           // padding: const EdgeInsets.all(8.0),
+                            //child: RaisedButton(
+                              //child: Text("ADD CASH"),
+                              //onPressed:(
+                                
+                                // _addBalance
+                                 
+                                 //),
+                            //),
+                          //)
+                        //],
+                      //),
+                    //),
+                  //);
+                }
+                
+                ),//////////////////////////////////////
+                  //Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => ManageCards()));
+                                  ///////////////performSubmit,
+                  
                   Spacer(),
                 ]),
               ),

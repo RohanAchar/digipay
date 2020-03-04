@@ -1,3 +1,4 @@
+import 'package:digipay_master1/views/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:digipay_master1/services/auth_service.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -70,7 +71,8 @@ class _SignUpViewState extends State<SignUpView> {
           String uid = await auth.createUserWithEmailAndPassword(
               _email, _password, _name);
           print("Signed up with New ID $uid");
-          Navigator.of(context).pushReplacementNamed('/signIn'); //home contains homecontroller
+         // Navigator.of(context).pushReplacementNamed('/'); //home contains homecontroller
+         Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => ProfileForm()));
         }
       } catch (e) {
         print(e);

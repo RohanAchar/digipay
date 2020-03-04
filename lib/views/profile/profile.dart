@@ -1,4 +1,5 @@
 import 'package:digipay_master1/models/uid.dart';
+import 'package:digipay_master1/views/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:string_validator/string_validator.dart' as v;
@@ -50,6 +51,7 @@ class ProfileFormState extends State<ProfileForm> {
   String _address;
   String _emailid;
   String _aadharno;
+  String _wallet='0';
 
    bool validate() {
     final form = formKey.currentState; //all the text fields will be set to values
@@ -68,9 +70,10 @@ class ProfileFormState extends State<ProfileForm> {
     if (validate()) {
       try{
         final uid = await Provider.of(context).auth.getCurrentUID();
-        await DatabaseService(uid: uid).updateUserData(_name, _phno, _emailid, _aadharno, _address);
+        await DatabaseService(uid: uid).updateUserData(_name, _phno, _emailid, _aadharno, _address,_wallet);
+        //await DatabaseService(uid: uid).updateWalletData('0');
         current_user_uid=uid;
-
+        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => Dashboard()));
       }
       catch(e)
     {

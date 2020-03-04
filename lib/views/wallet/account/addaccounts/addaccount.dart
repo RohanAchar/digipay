@@ -3,8 +3,8 @@ import 'package:digipay_master1/views/wallet/wallet.dart';
 import 'package:digipay_master1/widgets/provider_widget.dart';
 import 'package:flutter/material.dart';
 import './globals.dart' as global;
-final scaffoldKey = new GlobalKey<ScaffoldState>();
-final formKey = new GlobalKey<FormState>();
+final scaffoldKey1 = new GlobalKey<ScaffoldState>();
+final formKey1 = new GlobalKey<FormState>();
 class AddAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -36,12 +36,12 @@ class AddAccountsState extends State<AddAccounts> {
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<MyCustomFormState>.
 
-  final _formKey = GlobalKey<FormState>();
+  final _formKey1 = GlobalKey<FormState>();
   String _accNo;
   String _ifsc;
 
   bool validate() {
-    final form = formKey.currentState; //all the text fields will be set to values
+    final form = formKey1.currentState; //all the text fields will be set to values
     form.save(); // to save the form
     if (form.validate()) {
       form.save();
@@ -61,9 +61,10 @@ class AddAccountsState extends State<AddAccounts> {
       catch(e)
     {
       print(e);
-      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Processing Data')));
+      scaffoldKey1.currentState.showSnackBar(SnackBar(content: Text('Processing Data')));
     }
-    Navigator.push(
+    //Navigator.pop(context);
+    Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => Dashboard1()));
 
     }
@@ -71,7 +72,7 @@ class AddAccountsState extends State<AddAccounts> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        key: scaffoldKey,
+        key: scaffoldKey1,
         appBar: new AppBar(
           title: new Text("ADD ACCOUNT"),
         ),
@@ -81,9 +82,9 @@ class AddAccountsState extends State<AddAccounts> {
                     child: new Padding(
                         padding: const EdgeInsets.all(30.0),
                         child: new Form(
-                            key: _formKey,
+                            key: _formKey1,
                             child: new Form(
-                              key: formKey,
+                              key: formKey1,
                               child: new Column(children: <Widget>[
                                 new TextFormField(
                                   decoration: new InputDecoration(
