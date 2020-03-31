@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'cartmodel.dart';
 
+
+
 class HomePage extends StatelessWidget {
   List<Product> _products = [
     Product(
@@ -58,15 +60,15 @@ class HomePage extends StatelessWidget {
         itemBuilder: (context, index){
           return ScopedModelDescendant<CartModel>(
               builder: (context, child, model) {
-            return Card( child: Column( children: <Widget>[
-              Image.network(_products[index].imgUrl, height: 120, width: 120,),
-              Text(_products[index].title, style: TextStyle(fontWeight: FontWeight.bold),),
-              Text("\₹"+_products[index].price.toString()),
-              OutlineButton(
-                    child: Text("Add"),
-                    onPressed: () => model.addProduct(_products[index]))
-            ])); 
-          });
+                return Card( child: Column( children: <Widget>[
+                  Image.network(_products[index].imgUrl, height: 120, width: 120,),
+                  Text(_products[index].title, style: TextStyle(fontWeight: FontWeight.bold),),
+                  Text("\₹"+_products[index].price.toString()),
+                  OutlineButton(
+                      child: Text("Add"),
+                      onPressed: () => model.addProduct(_products[index]))
+                ]));
+              });
         },
       ),
 

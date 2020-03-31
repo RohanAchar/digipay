@@ -1,3 +1,4 @@
+import 'package:digipay_master1/views/shopping_cart/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:digipay_master1/views/shopping_cart/cartmodel.dart';
@@ -6,8 +7,8 @@ import 'package:digipay_master1/views/shopping_cart/home.dart';
 //import 'package:shopping/main.dart';
 
 //void main() => runApp(MyApp(
-   // model: CartModel(),
- // ));
+// model: CartModel(),
+// ));
 
 
 class Shop extends StatelessWidget{
@@ -25,7 +26,7 @@ class Shop extends StatelessWidget{
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Shopping Cart',
-        home: HomePage(),
+        home: DropDown(),
         routes: {'/cart': (context) => CartPage()},
       ),
     );
