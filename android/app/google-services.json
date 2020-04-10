@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1016073312053",
+    "firebase_url": "https://digipay-d4740.firebaseio.com",
+    "project_id": "digipay-d4740",
+    "storage_bucket": "digipay-d4740.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016073312053:android:486fed6f99b60842ac1e7c",
+        "android_client_info": {
+          "package_name": "com.digipay.digipay_master1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016073312053-b57at2bietb985unp4b4k1ja4is7pbnn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlCXC7_A7oQBjZ8zNqFvANm9Rb_h-IOJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1016073312053-b57at2bietb985unp4b4k1ja4is7pbnn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
