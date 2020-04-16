@@ -7,8 +7,11 @@ import 'package:scoped_model/scoped_model.dart';
 import 'cartmodel.dart';
 import 'package:digipay_master1/views/wallet/account/addaccounts/globals.dart' as global;
 import 'package:digipay_master1/models/uid.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class CartPage extends StatefulWidget {
+
   @override
   State<StatefulWidget> createState() {
     return _CartPageState();
@@ -16,6 +19,8 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+
+  Firestore _firestore = Firestore.instance;
    
    /*void performSave(String money) async {
     //getData();
@@ -139,6 +144,19 @@ class _CartPageState extends State<CartPage> {
                             global.wallet= global.wallet - ScopedModel.of<CartModel>(context,
                                     rebuildOnChange: true).totalCartValue;
                             await DatabaseService(uid: current_user_uid).updateUserWallet(global.wallet);
+                            await _firestore
+                                .collection('users')
+                                .document(current_user_uid)
+                                .collection('transaction history')
+                                .add({
+                              'amount': ScopedModel.of<CartModel>(context,
+                                  rebuildOnChange: true)
+                                  .totalCartValue,
+                              'time': FieldValue.serverTimestamp(),
+                              'closing_balance': global.wallet,
+                              'operation': 'shopping_debit',
+                              'source': 'wallet',
+                            });
                                     Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => Dashboard()));
                           }
 

@@ -266,24 +266,42 @@ class _DashboardState extends State<Dashboard> {
 }
 */
 import 'package:digipay_master1/views/profile/displayprofile.dart';
-import 'package:digipay_master1/views/profile/profile.dart';
 import 'package:digipay_master1/views/shopping_cart/cartmodel.dart';
-import 'package:digipay_master1/views/shopping_cart/cartpage.dart';
-import 'package:digipay_master1/views/shopping_cart/home.dart';
 import 'package:flutter/material.dart';
 import 'package:digipay_master1/widgets/provider_widget.dart';
 import 'package:digipay_master1/services/auth_service.dart';
 import 'shop.dart';
-import 'package:scoped_model/scoped_model.dart';
 import 'package:digipay_master1/views/wallet/wallet.dart';
+import 'package:digipay_master1/views/mobile recharge/MobileListPage.dart';
+import 'package:digipay_master1/views/movie/movie_list.dart';
+import 'package:digipay_master1/views/mobile recharge/rechargePage.dart';
+import 'package:digipay_master1/models/uid.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:digipay_master1/views/wallet/account/addaccounts/globals.dart' as global;
+import 'package:digipay_master1/views/passbook.dart';
+
+
+
+
+
+
+
+
 
 
 class Dashboard extends StatefulWidget {
+
+  static const String routeName = "/dashboard";
+
+
   @override
   _DashboardState createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
+
+
+
 
   final _formKey4 = GlobalKey<FormState>();
     
@@ -398,7 +416,7 @@ class _DashboardState extends State<Dashboard> {
           crossAxisSpacing:0.2,
           padding: EdgeInsets.all(1.0),
           children: <Widget>[
-            makeDashboardItem("Pay", Icons.payment),
+            makeDashboardItem("Passbook", Icons.payment),
             makeDashboardItem("Profile", Icons.people),
             makeDashboardItem("Wallet", Icons.account_balance),
           ],
@@ -480,7 +498,10 @@ class _DashboardState extends State<Dashboard> {
             onTap: () {
               if(title=='Shopping')
               Navigator.push(context, MaterialPageRoute(builder: (context) => Shop(model:CartModel())));
-
+              else if(title=='Mobile')
+                Navigator.push(context, MaterialPageRoute(builder: (context) => RechargePage()));
+              else if(title=='Movies')
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ListTileDemo()));
               else if(title=='Money to Friend')
               {
 
@@ -533,7 +554,7 @@ class _DashboardState extends State<Dashboard> {
               //Navigator.push(context, MaterialPageRoute(builder: (context) => Shop(model: null)));
 
               //else if(title=='Mobile')
-              //Navigator.push(context, MaterialPageRoute(builder: (context) => Shop(model: null)));
+              //Navigator.push(context, MaterialPageRoute(builder: (context) => MobileListPage()));
 
               //else
               //Navigator.push(context, MaterialPageRoute(builder: (context) => Shop(model: null)));
@@ -573,9 +594,12 @@ class _DashboardState extends State<Dashboard> {
             onTap: () {
               if(title=='Profile')
               Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileView()));
-
+              if(title=='Passbook')
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Passbook()));
               else if(title=='Wallet')
               Navigator.push(context, MaterialPageRoute(builder: (context) => Dashboard1()));
+
+
 
               /*else if(title=='Money to Friend')
               {
@@ -647,4 +671,32 @@ class _DashboardState extends State<Dashboard> {
           ),
         ));
   } 
+}
+
+class globalWallet extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: StreamBuilder(
+          stream: getWalletBalance(context),
+          builder: (context, snapshot) {
+            if(!snapshot.hasData) return const Text("Loading...");
+            else {
+              global.wallet= snapshot.data['user_wallet'];
+              return Text("");
+            }
+          }
+      ),
+    );
+  }
+
+  Stream<DocumentSnapshot> getWalletBalance(
+      BuildContext context) async* {
+    final uid = await Provider
+        .of(context)
+        .auth
+        .getCurrentUID();
+    yield* Firestore.instance.collection('users').document(uid).snapshots();
+  }
+
 }

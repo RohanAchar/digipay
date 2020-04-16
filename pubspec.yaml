@@ -33,6 +33,7 @@ dependencies:
   provider: ^4.0.2
   flutter_credit_card: ^0.1.3
   toast: ^0.1.5
+  ticket_pass_package: ^0.1.0
 
 dev_dependencies:
   flutter_test:
@@ -49,6 +50,11 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+  - assets/credit.jpg
+  - assets/debit.jpg
+  - assets/shopping.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

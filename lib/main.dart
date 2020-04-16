@@ -7,7 +7,7 @@ import 'package:digipay_master1/views/first_view.dart';
 import 'package:digipay_master1/views/sign_up_view.dart';
 import 'package:digipay_master1/widgets/provider_widget.dart';
 import 'package:digipay_master1/services/auth_service.dart';
-
+import 'views/dashboard.dart';
 
 void main() => runApp(MyApp());
 
@@ -26,7 +26,9 @@ class MyApp extends StatelessWidget {
           '/signUp': (BuildContext context) => SignUpView(authFormType: AuthFormType.signUp),
           '/signIn': (BuildContext context) => SignUpView(authFormType: AuthFormType.signIn),
           '/home': (BuildContext context) => HomeController(),
-          '/cart': (BuildContext context) => CartPage()
+          '/cart': (BuildContext context) => CartPage(),
+          '/dashboard': (BuildContext context) => Dashboard()
+
         },
       ),
     );

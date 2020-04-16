@@ -6,13 +6,22 @@ import 'package:digipay_master1/widgets/provider_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:digipay_master1/views/wallet/account/addaccounts/globals.dart' as global;
+import 'package:digipay_master1/views/movie/global_movie.dart' as Movieglobal;
+import 'package:digipay_master1/views/mobile recharge/global_mobile.dart' as Phoneglobal;
+
 import 'package:digipay_master1/models/uid.dart';
 import 'package:toast/toast.dart';
+import 'package:digipay_master1/views/movie/display_ticket.dart';
+
 
 final scaffoldKey = new GlobalKey<ScaffoldState>();
 
 
 class ManageCards extends StatelessWidget {
+
+  final String page;
+  ManageCards({this.page});
+
   final _formKey = GlobalKey<FormState>();
   int balance = 0;
   String h;
@@ -44,6 +53,8 @@ class ManageCards extends StatelessWidget {
           'amount': balance,
           'time': FieldValue.serverTimestamp(),
           'closing_balance': global.wallet,
+          'operation': 'credit',
+          'source': 'cards',
 
         });
         print(global.wallet);
@@ -188,48 +199,83 @@ class ManageCards extends StatelessWidget {
                               color: Colors.black54,
                             )),
                         onPressed: () async {
-                          global.rem = 0;
-                          await DatabaseService(uid: current_user_uid)
-                              .updateUserWallet(global.wallet);
-                          showToast("Money Debited", context,
-                              duration: Toast.LENGTH_SHORT,
-                              gravity: Toast.BOTTOM);
-                          Navigator.pushReplacement(context, MaterialPageRoute(
-                              builder: (context) => Dashboard()));
-                          //showDialog(
-                          //context: context,
-                          //builder: (BuildContext context) {
-                          //return AlertDialog(
-                          //content: Form(
-                          ///key: _formKey,
-                          //child: Column(
-                          //mainAxisSize: MainAxisSize.min,
-                          //children: <Widget>[
-                          //Padding(
-                          ///padding: EdgeInsets.all(8.0),
-                          //child: TextFormField(
-                          //decoration: new InputDecoration(labelText: "Money to add in the wallet"),
-                          //keyboardType: TextInputType.number,
-                          //textInputAction: TextInputAction.done,
-                          //onSaved: (val)=>balance=int.parse(val),
-                          //),
-                          //),
+                          if(page=='movie_wallet'){
+                            global.wallet=0;
+                            await DatabaseService(uid: current_user_uid).updateUserWallet(global.wallet);
+                            await _firestore
+                                .collection('users')
+                                .document(current_user_uid)
+                                .collection('transaction history')
+                                .add({
+                              'amount': Movieglobal.amt,
+                              'time': FieldValue.serverTimestamp(),
+                              'closing_balance': global.wallet,
+                              'operation': 'movie_debit_card+wallet',
+                              'source': 'wallet+card',
+                            });
+                            showToast("Paid ₹${global.rem} for Movie Tickets", context,
+                                duration: Toast.LENGTH_SHORT,
+                                gravity: Toast.BOTTOM);
+                            global.rem = 0;
+                            Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => DisplayTicket()));
 
-                          // Padding(
-                          // padding: const EdgeInsets.all(8.0),
-                          //child: RaisedButton(
-                          //child: Text("ADD CASH"),
-                          //onPressed:(
 
-                          // _addBalance
+                          }
+                         else if(page=='recharge_wallet') {
+                            global.wallet = 0;
+                            await DatabaseService(uid: current_user_uid)
+                                .updateUserWallet(global.wallet);
+                            await _firestore
+                                .collection('users')
+                                .document(current_user_uid)
+                                .collection('transaction history')
+                                .add({
+                              'amount': Movieglobal.amt,
+                              'time': FieldValue.serverTimestamp(),
+                              'closing_balance': global.wallet,
+                              'operation': 'recharge_debit_card+wallet',
+                              'source': 'wallet+card',
+                            });
+                            showToast("Paid ₹${global.rem} for Mobile Recharge",
+                                context,
+                                duration: Toast.LENGTH_SHORT,
+                                gravity: Toast.BOTTOM);
+                            global.rem = 0;
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(
+                                    builder: (context) => Dashboard()));
+                          }
 
-                          //),
-                          //),
-                          //)
-                          //],
-                          //),
-                          //),
-                          //);
+
+                          else if(page=="movie")
+                            {
+                              showToast("Paid ₹${Movieglobal.amt} for Movie Tickets", context,
+                                  duration: Toast.LENGTH_SHORT,
+                                  gravity: Toast.BOTTOM);
+                              Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => DisplayTicket()));
+
+                            }
+                          else if(page=="recharge")
+                          {
+                            showToast("Paid ₹${Phoneglobal.amt} for Mobile Recharge", context,
+                                duration: Toast.LENGTH_SHORT,
+                                gravity: Toast.BOTTOM);
+                            Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => Dashboard()));
+
+                          }
+
+                          else{
+                            global.rem=0;
+                            global.wallet=0;
+                            await DatabaseService(uid: current_user_uid)
+                                .updateUserWallet(global.wallet);
+                            showToast("Money Debited", context,
+                                duration: Toast.LENGTH_SHORT,
+                                gravity: Toast.BOTTOM);
+                            Navigator.pushReplacement(context, MaterialPageRoute(
+                                builder: (context) => Dashboard()));
+
+                          }
                         }
 
                     ),
@@ -249,4 +295,3 @@ class ManageCards extends StatelessWidget {
         ));
   }
 }
-

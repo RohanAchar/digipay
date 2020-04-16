@@ -3,15 +3,25 @@ import 'package:digipay_master1/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:digipay_master1/views/wallet/account/addaccounts/globals.dart' as global;
+import 'package:digipay_master1/views/movie/global_movie.dart' as Movieglobal;
+import 'package:digipay_master1/views/mobile recharge/global_mobile.dart' as Phoneglobal;
 import 'package:digipay_master1/services/database.dart';
 import 'package:digipay_master1/widgets/provider_widget.dart';
 import 'package:digipay_master1/models/uid.dart';
 import 'package:toast/toast.dart';
+import 'package:digipay_master1/views/dashboard.dart';
+import 'package:digipay_master1/views/movie/display_ticket.dart';
+
+
 
 
 class ManageAccounts extends StatelessWidget {
 
-final _formKey = GlobalKey<FormState>();
+  final String page;
+  ManageAccounts({this.page});
+
+
+  final _formKey = GlobalKey<FormState>();
     int balance=0;
     String h;
     String fb;
@@ -39,6 +49,8 @@ Firestore _firestore = Firestore.instance;
           'amount': balance,
           'time': FieldValue.serverTimestamp(),
           'closing_balance': global.wallet,
+          'operation': 'credit',
+          'source': 'accounts',
 
         });
         fb = global.wallet.toString();
@@ -152,6 +164,46 @@ static void showToast(String msg,context, {int duration, int gravity}) {
                   Spacer(),
                 ]),
               ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
+                child: Row(children: <Widget>[
+                  new RaisedButton(
+                      child: new Text("PAY ${global.rem}",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black54,
+                          )),
+                      onPressed: () async {
+
+                        if(page=="movie")
+                        {
+                          showToast("Paid ₹${Movieglobal.amt} for Movie Tickets", context,
+                              duration: Toast.LENGTH_SHORT,
+                              gravity: Toast.BOTTOM);
+                          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => DisplayTicket()));
+
+                        }
+                        if(page=="recharge")
+                        {
+                          showToast("Paid ₹${Phoneglobal.amt} for Movie Tickets", context,
+                              duration: Toast.LENGTH_SHORT,
+                              gravity: Toast.BOTTOM);
+                          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => Dashboard()));
+
+                        }
+
+
+                      }
+
+                  ),
+                  //////////////////////////////////////
+                  //Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => ManageCards()));
+                  ///////////////performSubmit,
+
+                  Spacer(),
+                ]),
+              ),
+
 
               /*Padding(
                 padding: const EdgeInsets.only(top: 4.0, bottom: 80.0),
