@@ -135,12 +135,14 @@ class _MobileDetailPageState extends State<MobileDetailPage> {
                           ],
                         ),
                       ),
+
                     ],
                   ),
                 ),
               )),
           ])
       ),
+
     );
 
   }

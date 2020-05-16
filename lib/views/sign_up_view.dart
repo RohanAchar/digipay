@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:digipay_master1/services/auth_service.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:digipay_master1/widgets/provider_widget.dart';
+import 'package:digipay_master1/models/uid.dart';
 
 // TODO move this to tone location
 final primaryColor = const Color(0xFF75A2EA);
@@ -58,6 +59,7 @@ class _SignUpViewState extends State<SignUpView> {
         final auth = Provider.of(context).auth;
         if (authFormType == AuthFormType.signIn) {
           String uid = await auth.signInWithEmailAndPassword(_email, _password);
+          current_user_uid= uid;
           print("Signed In with ID $uid");
           Navigator.of(context).pushReplacementNamed('/home');
         } else if (authFormType == AuthFormType.reset) {

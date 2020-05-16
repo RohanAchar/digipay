@@ -219,10 +219,35 @@ class PromoCode extends StatelessWidget {
   }
 
   Widget build(BuildContext context) {
-
     return Container(
-      child:
-      StreamBuilder(
+        child: Center(
+          child: Container(
+            //margin:  EdgeInsets.all(20.0),
+            //width: 600.0,
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 450.0),
+                ),
+                AppBar(
+                  backgroundColor: Colors.blue,
+                  centerTitle: true,
+                  title: Text("Promocodes"),
+                ),
+                Expanded(
+                  child: SizedBox(
+                    height: 200.0,
+                    child: build123(context),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
+  }
+  Widget build123(BuildContext context) {
+    return Container(
+      child: StreamBuilder(
           stream: transSnapshots(context),
           builder: (context, snapshot) {
             if (!snapshot.hasData) return const Text("Loading...");
@@ -231,11 +256,6 @@ class PromoCode extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) =>
                     buildTransCard(context, snapshot.data.documents[index]));
           }),
-
-
-
-
-
     );
   }
 
@@ -257,7 +277,7 @@ class PromoCode extends StatelessWidget {
   Widget buildTransCard(BuildContext context, DocumentSnapshot promo) {
     return Material(
       elevation: 2.0,
-      borderRadius: BorderRadius.circular(18.0),
+      borderRadius: BorderRadius.circular(0.0),
       child: Container(
           width: MediaQuery.of(context).size.width - 30.0,
           decoration: BoxDecoration(
@@ -276,7 +296,7 @@ class PromoCode extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             ListTile(
-                              title:Text(
+                              title: Text(
                                 promo['promo_name'],
                                 style: TextStyle(
                                     color: Colors.black,
@@ -301,6 +321,7 @@ class PromoCode extends StatelessWidget {
                                       label: Text('Apply'),
                                       onPressed: () {
                                         Navigator.pop(context);
+                                        //Navigator.push(context, MaterialPageRoute(builder: (context) => Dashboard()));
                                       }),
                                 ),
                               ),
@@ -315,9 +336,12 @@ class PromoCode extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12.0),
                           color: Colors.grey,
                         ),
-                      )
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 80.0),
+                        child: Container(color: Colors.yellow),
+                      ),
                     ],
-
                   ),
                 ),
               ))),
