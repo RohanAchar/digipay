@@ -4,6 +4,7 @@ import 'package:digipay_master1/services/auth_service.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:digipay_master1/widgets/provider_widget.dart';
 import 'package:digipay_master1/models/uid.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 // TODO move this to tone location
 final primaryColor = const Color(0xFF75A2EA);
@@ -11,6 +12,7 @@ final primaryColor = const Color(0xFF75A2EA);
 enum AuthFormType { signIn, signUp, reset } //defining the auth form types
 
 class SignUpView extends StatefulWidget {
+
   final AuthFormType authFormType;
 
   SignUpView({Key key, @required this.authFormType}) : super(key: key);
@@ -22,6 +24,8 @@ class SignUpView extends StatefulWidget {
 
 class _SignUpViewState extends State<SignUpView> {
   AuthFormType authFormType;
+
+  Firestore _firestore = Firestore.instance;
 
   _SignUpViewState({this.authFormType});
 
@@ -73,6 +77,16 @@ class _SignUpViewState extends State<SignUpView> {
           String uid = await auth.createUserWithEmailAndPassword(
               _email, _password, _name);
           print("Signed up with New ID $uid");
+          await _firestore.collection('').add({
+            'amount': '',
+          });
+
+
+
+
+
+
+
          // Navigator.of(context).pushReplacementNamed('/'); //home contains homecontroller
          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => ProfileForm()));
         }
