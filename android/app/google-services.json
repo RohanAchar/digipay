@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "1023452826862",
-    "firebase_url": "https://digipay-3869b.firebaseio.com",
-    "project_id": "digipay-3869b",
-    "storage_bucket": "digipay-3869b.appspot.com"
+    "project_number": "888527001864",
+    "firebase_url": "https://digipay-a0859.firebaseio.com",
+    "project_id": "digipay-a0859",
+    "storage_bucket": "digipay-a0859.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1023452826862:android:53a5f1cab59b3f24fe37ff",
+        "mobilesdk_app_id": "1:888527001864:android:6f4780a4e8dd3fe8ec34bd",
         "android_client_info": {
           "package_name": "com.digipay.digipay_master1"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1023452826862-9irscj70gvgs21tm63p29l11cnql4uuh.apps.googleusercontent.com",
+          "client_id": "888527001864-tg2nqff6q4hbcu5si5a77ntck7hl7tgp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA0tAaLNU2sQM3-CkqyvuZNUmsakDhiRc4"
+          "current_key": "AIzaSyDQ9527bsEPynktW3WLpWNx0t5Qcy9rtUo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1023452826862-9irscj70gvgs21tm63p29l11cnql4uuh.apps.googleusercontent.com",
+              "client_id": "888527001864-tg2nqff6q4hbcu5si5a77ntck7hl7tgp.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
