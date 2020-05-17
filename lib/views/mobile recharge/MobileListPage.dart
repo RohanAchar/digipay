@@ -53,7 +53,7 @@ class _MobileListPageState extends State<MobileListPage> {
               fontSize:20,
             )),
         onPressed: () {
-          navigateToDetail(mob['pid'],mob['name'],widget.phno);
+          navigateToDetail(mob.documentID,mob['name'],widget.phno);
         },
       ),
     );
