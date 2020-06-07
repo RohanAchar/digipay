@@ -77,17 +77,6 @@ class _SignUpViewState extends State<SignUpView> {
           String uid = await auth.createUserWithEmailAndPassword(
               _email, _password, _name);
           print("Signed up with New ID $uid");
-          await _firestore.collection('').add({
-            'amount': '',
-          });
-
-
-
-
-
-
-
-         // Navigator.of(context).pushReplacementNamed('/'); //home contains homecontroller
          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => ProfileForm()));
         }
       } catch (e) {
