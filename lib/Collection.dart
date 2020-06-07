@@ -60,7 +60,7 @@ bool enable =true;
     'Rs279=Unlimited calls to all network with daily 1GB data and 100 SMS for 36 days.']];
   DocumentReference mobile_id,movie_id,theatre_id,promo_id;
     try {
-    /*  for(int i=0;i<operators.length;i++) {
+     for(int i=0;i<operators.length;i++) {
           mobile_id =  await _firestore.collection('mobile recharge').add({
           'name': operators[i],
 
@@ -73,7 +73,7 @@ bool enable =true;
        });
      }
 
-      }  */
+      }  
       // Movie collection
       final List movies = [['Brahmastra','10th Oct','U/A'],['Black Widow','24th May','U/A'],['Karwaan','13th July','U']];
       final List theatres = [['Big Cinemas','PVR Kormangala'],['Balaji 2K cinemas','INOX Mantri'],['Cinepolis']];
@@ -96,7 +96,7 @@ bool enable =true;
 
       }
 
-  /*   //promo codes
+    //promo codes
       final List<String> promo = ['movie_codes','recharge_codes','shopping_codes'];
       final List amt = [[100],[150,100,24,20],[99]];
       final List des = [['This gives you a Rs100 off'],['Nemm mane pataki na namm udinKaddi dinda hacchi','Pheww! Me flat','This gives you a 24 off','Rs20 free pataki for Diwali '],['Rs99 Off']];
@@ -115,7 +115,7 @@ bool enable =true;
             'promo_name': name[i][j],
           });
         }
-      } */
+      } 
       }
       catch (e) {
         print(e);
