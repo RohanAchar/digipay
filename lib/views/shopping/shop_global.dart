@@ -1,0 +1,10 @@
+List cat=["ALL","PHONES","ACCESSORIES"];
+String a;
+List all=["phone1","phone2","phone3","acc1","acc2","acc3"];
+List phone=["phone1","phone2","phone3"];
+List acc=["acc1","acc2","acc3"];
+List allP=["100","200","300","400","500","600"];
+List phoneP=["100","200","300"];
+List accP=["400","500","600"];
+int Shoptotal=0;
+int Shopamt=0;
