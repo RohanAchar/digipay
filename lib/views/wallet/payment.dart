@@ -294,9 +294,9 @@ class PromoCode extends StatelessWidget {
       col = "movie_codes";
     }
     if(page == "shopping")
-      {
-        col = "shopping_codes";
-      }
+    {
+      col = "shopping_codes";
+    }
 
     yield* _firestore.collection('promo codes').document('OJ6yjUf7DNpx0Ya2OiLk').collection(col).snapshots();
 
@@ -349,6 +349,26 @@ class PromoCode extends StatelessWidget {
                                       label: Text('Apply'),
                                       onPressed: () {
                                         Navigator.pop(context);
+                                        if (page == "recharge" && Phoneglobal.amt > promo['amt']) {
+                                          Phoneglobal.amt = Phoneglobal.amt - promo['amt'];
+                                          showToast("Promocode Applied - ${promo['promo_name']}", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+
+                                        }
+                                       else if (page == "movie" && Movieglobal.amt > promo['amt']) {
+                                          Movieglobal.amt = Movieglobal.amt - promo['amt'];
+                                          showToast("Promocode Applied - ${promo['promo_name']}", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+
+                                        }
+                                       else if(page == "shopping" && Shopglobal.Shoptotal > promo['amt'])
+                                        {
+                                          Shopglobal.Shoptotal = Shopglobal.Shoptotal - promo['amt'];
+                                          showToast("Promocode Applied - ${promo['promo_name']}", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                                        }
+
+                                        else {
+                                          showToast("Promocode Not applied", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                                        }
+
                                         //Navigator.push(context, MaterialPageRoute(builder: (context) => Dashboard()));
                                       }),
                                 ),
