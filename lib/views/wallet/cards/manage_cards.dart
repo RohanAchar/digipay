@@ -247,7 +247,7 @@ class ManageCards extends StatelessWidget {
                             });
 
 
-
+                            DatabaseService(uid: current_user_uid).delete();
                             showToast("Paid ₹${global.rem} for Shopping", context, duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
                             global.rem = 0;
                             Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => Dashboard()));
@@ -267,6 +267,7 @@ class ManageCards extends StatelessWidget {
 
                           else if(page=="shopping")
                           {
+                            DatabaseService(uid: current_user_uid).delete();
                             showToast("Paid ₹${Shopglobal.Shopamt} for Shopping", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                             Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => Dashboard()));
                           }

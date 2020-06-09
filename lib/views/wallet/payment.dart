@@ -128,6 +128,7 @@ class ListTileDemo extends StatelessWidget {
           'operation': 'shopping_debit',
           'source': 'wallet',
         });
+        DatabaseService(uid: current_user_uid).delete();
        showToast("Shopping Done", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
         Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => Dashboard()));
       }

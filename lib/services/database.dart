@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digipay_master1/models/user.dart';
+import 'package:digipay_master1/models/uid.dart';
 
 
 
@@ -75,6 +76,23 @@ Future updateUserAccountData(
 Stream<QuerySnapshot> requestDocuments(){
     return profileCollection.document(uid).collection('cards').snapshots();
 }
+
+  void delete() async{
+
+    Firestore _firestore = Firestore.instance;
+    await _firestore.collection('users').document(uid).collection('cart').getDocuments().then((snapshot) {
+      for (DocumentSnapshot doc in snapshot.documents) {
+        String id=doc.documentID;
+        print(id);
+        Firestore.instance
+            .collection('users').document(uid).collection('cart')
+            .document('$id')
+            .delete();
+
+      }});
+
+  }
+
 }
 
 

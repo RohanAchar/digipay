@@ -201,6 +201,7 @@ static void showToast(String msg,context, {int duration, int gravity}) {
                         }
                         if(page=="shopping")
                         {
+                          DatabaseService(uid: current_user_uid).delete();
                           showToast("Paid ₹${Shopglobal.Shopamt} for Shopping", context,
                               duration: Toast.LENGTH_LONG,
                               gravity: Toast.BOTTOM);

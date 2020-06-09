@@ -65,9 +65,9 @@ class _DashboardState extends State<Dashboard> {
     if(validate()){
       send=bal.toString();
     }
-
-
   }
+
+
   void setUID(BuildContext context) async {
     final uid = await Provider
         .of(context)

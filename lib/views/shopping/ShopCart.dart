@@ -266,7 +266,9 @@ class ProceedToPay extends StatelessWidget {
               Shopamt=0;
               final listElements = snapshot.data.documents;
               for (var items in listElements) {
-                count++;
+                if(items.data['item_quantity'] > 0 ) {
+                  count++;
+                }
                 Shopamt = Shopamt+ items.data['total'];
 
               }
