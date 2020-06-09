@@ -27,22 +27,22 @@ class Passbook extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar:  AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.blue,
-        title: Text("Passbook"),
-    ),
-    body: Container(
-      color: Colors.white70,
-      child: StreamBuilder(
-          stream: transSnapshots(context),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) return const Text("Loading...");
-            return new ListView.builder(
-                itemCount: snapshot.data.documents.length,
-                itemBuilder: (BuildContext context, int index) =>
-                    buildTransCard(context, snapshot.data.documents[index]));
-          }),
-    )
+          centerTitle: true,
+          backgroundColor: Colors.blue,
+          title: Text("Passbook"),
+        ),
+        body: Container(
+          color: Colors.white70,
+          child: StreamBuilder(
+              stream: transSnapshots(context),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) return const Text("Loading...");
+                return new ListView.builder(
+                    itemCount: snapshot.data.documents.length,
+                    itemBuilder: (BuildContext context, int index) =>
+                        buildTransCard(context, snapshot.data.documents[index]));
+              }),
+        )
     );
   }
 
@@ -103,6 +103,22 @@ class Passbook extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15.0),
                               )
+                                  : trans['operation'] == "movie_debit_card+wallet"
+                                  ? Text(
+                                "Paid for Movie Booking from Wallet and card",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15.0),
+                              )
+                                  : trans['operation'] == "recharge_debit_card+wallet"
+                                  ? Text(
+                                "Paid for Mobile recharge from Wallet and card",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15.0),
+                              )
                                   : Text(
                                 "Added to Wallet from " +
                                     trans['source'],
@@ -121,7 +137,7 @@ class Passbook extends StatelessWidget {
                                     image:  trans['operation'] == "credit"
                                         ? DecorationImage(
                                         image: AssetImage('assets/credit.jpg'))
-                                        : trans['operation'] == "recharge_debit" || trans['operation'] == "movie_debit"
+                                        : trans['operation'] == "recharge_debit" || trans['operation'] == "movie_debit" || trans['operation'] == "recharge_debit_card+wallet" || trans['operation'] == "movie_debit_card+wallet"
                                         ? DecorationImage(
                                         image:
                                         AssetImage('assets/debit.jpg'))

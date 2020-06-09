@@ -1,3 +1,6 @@
+import 'package:digipay_master1/views/shopping/details/details.dart';
+import 'package:digipay_master1/views/shopping/details/details1.dart';
+import 'package:digipay_master1/views/shopping/details/details2.dart';
 import 'package:flutter/material.dart';
 import 'package:digipay_master1/views/shopping/shop_global.dart';
 import 'package:digipay_master1/views/shopping/shophomepage.dart';
@@ -131,12 +134,12 @@ class ListItemWidget extends State<SwipeList> {
                     child: RaisedButton(
                       child: Text("Submit"),
                       onPressed:()
-{
+                      {
 
-                          _addBalance();
-                          Navigator.pop(context);
+                        _addBalance();
+                        Navigator.pop(context);
 
-        },
+                      },
                     ),
                   )
                 ],
@@ -155,121 +158,137 @@ class ListItemWidget extends State<SwipeList> {
           itemBuilder: (context, index) {
             return Dismissible(
 
-              key: Key(items[index]),
-              background: Container(
-                alignment: AlignmentDirectional.centerEnd,
-                color: Colors.red,
-                child: Icon(
-                  Icons.delete,
-                  color: Colors.white,
+                key: Key(items[index]),
+                background: Container(
+                  alignment: AlignmentDirectional.centerEnd,
+                  color: Colors.red,
+                  child: Icon(
+                    Icons.delete,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              onDismissed: (direction) {
-                setState(() {
-                  items.removeAt(index);
-                });
-              },
-              direction: DismissDirection.endToStart,
-              child: Card(
+                onDismissed: (direction) {
+                  setState(() {
+                    items.removeAt(index);
+                  });
+                },
+                direction: DismissDirection.endToStart,
+                child: Card(
+                  child: new InkWell(
+                    onTap: () {
+                      if(phone[index]=='phone1'){
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => DisplayView1()));
+                      }
+                      else if (phone[index]=='phone2'){
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => DisplayView2()));
+                      }
+                      else{
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => DisplayView3()));
+                      }
 
-                elevation: 5,
-                child: Container(
-                  height: 70.0,
-                  child: Wrap(
-                    spacing: 1.0,
-                    runSpacing: 6.0,
-                    direction: Axis.vertical,
-                    children: <Widget>[
-                      //Text("hry")
 
-                      Container(
-                        height: 100.0,
-                        width: 70.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(5),
-                              topLeft: Radius.circular(5)),
-                          // image: DecorationImage(
-                          //  fit: BoxFit.cover,
-                          //   image: NetworkImage("https://is2-ssl.mzstatic.com/image/thumb/Video2/v4/e1/69/8b/e1698bc0-c23d-2424-40b7-527864c94a8e/pr_source.lsr/268x0w.png")
-                          // )
-                        ),
-                      ),
-                      //================================
-                      Container(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            ButtonTheme(
-                              child: ButtonBar(
-                                children: <Widget>[
 
-                                  RaisedButton(
+                    },
 
-                                      child: const Text('Add to Cart',
-                                          style: TextStyle(color: Colors.white)),
-                                      onPressed: () {
-                                        j=index;
-                                        createAlertDialog1(context).then((onValue){
-                                          SnackBar mySnackbar =SnackBar(content:Text("Added To Cart") );
-                                          Scaffold.of(context).showSnackBar(mySnackbar);
-                                        });
-                                      }),
 
-                                ],
-                              ),
+                    child: Container(
+                      height: 70.0,
+                      child: Wrap(
+                        spacing: 1.0,
+                        runSpacing: 6.0,
+                        direction: Axis.vertical,
+                        children: <Widget>[
+                          //Text("hry")
+
+                          Container(
+                            height: 100.0,
+                            width: 70.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(5),
+                                  topLeft: Radius.circular(5)),
+                              // image: DecorationImage(
+                              //  fit: BoxFit.cover,
+                              //   image: NetworkImage("https://is2-ssl.mzstatic.com/image/thumb/Video2/v4/e1/69/8b/e1698bc0-c23d-2424-40b7-527864c94a8e/pr_source.lsr/268x0w.png")
+                              // )
                             ),
-                          ],
-                        ),
-                      ),
+                          ),
+                          //================================
+                          Container(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                ButtonTheme(
+                                  child: ButtonBar(
+                                    children: <Widget>[
+
+                                      RaisedButton(
+
+                                          child: const Text('Add to Cart',
+                                              style: TextStyle(color: Colors.white)),
+                                          onPressed: () {
+                                            j=index;
+                                            createAlertDialog1(context).then((onValue){
+                                              SnackBar mySnackbar =SnackBar(content:Text("Added To Cart") );
+                                              Scaffold.of(context).showSnackBar(mySnackbar);
+                                            });
+                                          }),
+
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
 
 
-                      //==================================
-                      Container(
-                        height: 85,
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(10, 2, 0, 9),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                items[index],
-                              ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(0, 4, 0, 2),
-                                child: Container(
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.teal),
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(5))),
-                                  /*child: Text(
+                          //==================================
+                          Container(
+                            height: 85,
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(10, 2, 0, 9),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    items[index],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 4, 0, 2),
+                                    child: Container(
+                                      width: 150,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(color: Colors.teal),
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(5))),
+                                      /*child: Text(
                                 "Quantity Left : 65 KG",
                                 //Text("Discount : $onValue")
                                 textAlign: TextAlign.center,
                               ),*/
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(0, 5, 0, 2),
-                                child: Container(
-                                  width: 260,
-                                  child: Text(
-                                    "Price :"+phoneP[index],
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: Color.fromARGB(255, 48, 48, 54)),
+                                    ),
                                   ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 5, 0, 2),
+                                    child: Container(
+                                      width: 260,
+                                      child: Text(
+                                        "Price :"+phoneP[index],
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: Color.fromARGB(255, 48, 48, 54)),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ),
+                )
             );
           },
         ));
