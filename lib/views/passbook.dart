@@ -137,7 +137,7 @@ class Passbook extends StatelessWidget {
                                     image:  trans['operation'] == "credit"
                                         ? DecorationImage(
                                         image: AssetImage('assets/credit.jpg'))
-                                        : trans['operation'] == "recharge_debit" || trans['operation'] == "movie_debit" || trans['operation'] == "recharge_debit_card+wallet" || trans['operation'] == "movie_debit_card+wallet"
+                                        : trans['operation'] == "recharge_debit" || trans['operation'] == "movie_debit" || trans['operation'] == "recharge_debit_card+wallet" || trans['operation'] == "movie_debit_card+wallet " || trans['operation'] == "shopping_debit_card+wallet"
                                         ? DecorationImage(
                                         image:
                                         AssetImage('assets/debit.jpg'))
